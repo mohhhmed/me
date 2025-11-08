@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - Khebbab Mohamed</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f2847 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 245, 255, 0.02) 2px, rgba(0, 245, 255, 0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        nav {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #ff006e 0%, #ff1493 100%);
+            color: #fff;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            border: 2px solid #00f5ff;
+            border-radius: 4px;
+            box-shadow: 0 8px 24px rgba(255, 0, 110, 0.2), 0 0 20px rgba(0, 245, 255, 0.15);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            letter-spacing: 1px;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        nav a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(255, 0, 110, 0.3), 0 0 30px rgba(0, 245, 255, 0.25);
+            border-color: #06ffa5;
+        }
+
+        nav a:hover::before {
+            left: 100%;
+        }
+
+        nav a.active {
+            background: linear-gradient(135deg, #06ffa5 0%, #00f5ff 100%);
+            color: #0f2847;
+            border-color: #ffd60a;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            z-index: 5;
+            padding: 100px 40px 40px;
+        }
+
+        .content {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.7);
+            border: 2px solid #00f5ff;
+            border-radius: 8px;
+            padding: 50px;
+            box-shadow: 0 0 40px rgba(0, 245, 255, 0.15), inset 0 0 40px rgba(0, 245, 255, 0.05);
+            animation: slideIn 0.6s ease-out;
+            backdrop-filter: blur(10px);
+        }
+
+        .content h1 {
+            font-family: 'JetBrains Mono', monospace;
+            color: #ffd60a;
+            font-size: 28px;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Forum thread styling for static content */
+        .forum-section {
+            margin-bottom: 30px;
+        }
+
+        .forum-section h2 {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00f5ff;
+            font-size: 18px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #06ffa5;
+        }
+
+        .thread {
+            background: rgba(6, 255, 165, 0.05);
+            border: 1px solid #06ffa5;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .thread:hover {
+            background: rgba(6, 255, 165, 0.1);
+            box-shadow: 0 0 15px rgba(6, 255, 165, 0.2);
+            border-color: #00f5ff;
+        }
+
+        .thread-title {
+            color: #ffd60a;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .thread-meta {
+            color: #00f5ff;
+            font-size: 12px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .thread-content {
+            color: #06ffa5;
+            font-size: 14px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .coming-soon {
+            text-align: center;
+            color: #ff006e;
+            font-size: 14px;
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #ff006e;
+            border-radius: 6px;
+            font-style: italic;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                top: 15px;
+                left: 15px;
+                gap: 6px;
+            }
+
+            nav a {
+                padding: 10px 12px;
+                font-size: 8px;
+                border-radius: 3px;
+                box-shadow: 0 4px 12px rgba(255, 0, 110, 0.15);
+                white-space: nowrap;
+            }
+
+            .container {
+                padding: 120px 20px 40px;
+                min-height: 100vh;
+            }
+
+            .content {
+                padding: 40px 25px;
+                border-radius: 6px;
+            }
+
+            .content h1 {
+                font-size: 20px;
+                margin-bottom: 25px;
+            }
+
+            .forum-section h2 {
+                font-size: 15px;
+            }
+
+            .thread {
+                padding: 15px;
+                margin-bottom: 12px;
+            }
+
+            .thread-title {
+                font-size: 13px;
+            }
+
+            .thread-meta {
+                font-size: 11px;
+            }
+
+            .thread-content {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                top: 12px;
+                left: 12px;
+                gap: 5px;
+            }
+
+            nav a {
+                padding: 9px 10px;
+                font-size: 7px;
+                border: 1px solid #00f5ff;
+                box-shadow: 0 2px 8px rgba(255, 0, 110, 0.1);
+            }
+
+            .container {
+                padding: 110px 15px 30px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .content h1 {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+
+            .forum-section h2 {
+                font-size: 13px;
+            }
+
+            .thread {
+                padding: 12px;
+                margin-bottom: 10px;
+            }
+
+            .thread-title {
+                font-size: 12px;
+            }
+
+            .thread-meta {
+                font-size: 10px;
+            }
+
+            .thread-content {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="bio.html">BIO</a>
+        <a href="aboutme.html">ABOUT ME</a>
+        <a href="career.html">CAREER</a>
+        <a href="contact.html">CONTACT</a>
+        <a href="forum.html" class="active">FORUM</a>
+    </nav>
+
+    <div class="container">
+        <div class="content">
+            <h1>COMMUNITY FORUM</h1>
+
+            <div class="forum-section">
+                <h2>General Discussion</h2>
+                
+                <div class="thread">
+                    <div class="thread-title">Welcome to the Community Forum!</div>
+                    <div class="thread-meta">Posted by Admin • Today</div>
+                    <div class="thread-content">
+                        Hey everyone! This is the place to discuss ideas, ask questions, and connect with other members of our community. Feel free to introduce yourselves and share your thoughts!
+                    </div>
+                </div>
+
+                <div class="thread">
+                    <div class="thread-title">What inspired you to join?</div>
+                    <div class="thread-meta">Posted by Community • Yesterday</div>
+                    <div class="thread-content">
+                        Let's get to know each other better! Share your story - what brought you here and what are you most interested in exploring?
+                    </div>
+                </div>
+            </div>
+
+            <div class="forum-section">
+                <h2>Web Development</h2>
+                
+                <div class="thread">
+                    <div class="thread-title">Best practices for modern web development</div>
+                    <div class="thread-meta">Posted by Developer • 2 days ago</div>
+                    <div class="thread-content">
+                        Let's share our favorite tools, frameworks, and development practices. What's working best for you in 2024?
+                    </div>
+                </div>
+
+                <div class="thread">
+                    <div class="thread-title">Frontend vs Backend - which do you prefer?</div>
+                    <div class="thread-meta">Posted by Tech Enthusiast • 3 days ago</div>
+                    <div class="thread-content">
+                        Curious to hear your thoughts! Are you more into crafting beautiful UIs or building robust backend systems? What drives your passion?
+                    </div>
+                </div>
+            </div>
+
+            <div class="forum-section">
+                <h2>Design & Creative</h2>
+                
+                <div class="thread">
+                    <div class="thread-title">Showcase your latest projects</div>
+                    <div class="thread-meta">Posted by Designer • 4 days ago</div>
+                    <div class="thread-content">
+                        Got a cool project you're proud of? Share it here! Let's celebrate and learn from each other's work and creativity.
+                    </div>
+                </div>
+
+                <div class="thread">
+                    <div class="thread-title">Design inspiration and resources</div>
+                    <div class="thread-meta">Posted by Creative • 5 days ago</div>
+                    <div class="thread-content">
+                        Share your favorite design resources, color palettes, and inspiration sources. Let's build a collection of awesome creative tools!
+                    </div>
+                </div>
+            </div>
+
+            <div class="coming-soon">
+                📝 Backend forum features coming soon! Real-time discussions, user replies, and threaded conversations will be available soon.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
