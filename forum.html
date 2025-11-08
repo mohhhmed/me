@@ -126,7 +126,6 @@
             text-transform: uppercase;
         }
 
-        /* Forum thread styling for static content */
         .forum-section {
             margin-bottom: 30px;
         }
@@ -204,21 +203,30 @@
 
         @media (max-width: 768px) {
             nav {
-                top: 15px;
-                left: 15px;
+                position: fixed;
+                top: auto;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: row;
                 gap: 6px;
+                background: rgba(10, 14, 39, 0.95);
+                padding: 10px;
+                border-radius: 8px;
+                border: 2px solid #00f5ff;
+                box-shadow: 0 -4px 20px rgba(0, 245, 255, 0.2);
+                backdrop-filter: blur(10px);
             }
 
             nav a {
-                padding: 10px 12px;
+                padding: 8px 12px;
                 font-size: 8px;
                 border-radius: 3px;
                 box-shadow: 0 4px 12px rgba(255, 0, 110, 0.15);
-                white-space: nowrap;
             }
 
             .container {
-                padding: 120px 20px 40px;
+                padding: 40px 20px 100px;
                 min-height: 100vh;
             }
 
@@ -252,26 +260,14 @@
             .thread-content {
                 font-size: 12px;
             }
+
+            .coming-soon {
+                font-size: 12px;
+                padding: 15px;
+            }
         }
 
         @media (max-width: 480px) {
-            nav {
-                top: 12px;
-                left: 12px;
-                gap: 5px;
-            }
-
-            nav a {
-                padding: 9px 10px;
-                font-size: 7px;
-                border: 1px solid #00f5ff;
-                box-shadow: 0 2px 8px rgba(255, 0, 110, 0.1);
-            }
-
-            .container {
-                padding: 110px 15px 30px;
-            }
-
             .content {
                 padding: 30px 20px;
             }
