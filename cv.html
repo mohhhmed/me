@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career - Khebbab Mohamed</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f2847 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 245, 255, 0.02) 2px, rgba(0, 245, 255, 0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        nav {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #ff006e 0%, #ff1493 100%);
+            color: #fff;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            border: 2px solid #00f5ff;
+            border-radius: 4px;
+            box-shadow: 0 8px 24px rgba(255, 0, 110, 0.2), 0 0 20px rgba(0, 245, 255, 0.15);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            letter-spacing: 1px;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        nav a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(255, 0, 110, 0.3), 0 0 30px rgba(0, 245, 255, 0.25);
+            border-color: #06ffa5;
+        }
+
+        nav a:hover::before {
+            left: 100%;
+        }
+
+        nav a.active {
+            background: linear-gradient(135deg, #ffd60a 0%, #ff9500 100%);
+            color: #0f2847;
+            border-color: #ff006e;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 5;
+            padding: 100px 40px;
+        }
+
+        .content {
+            max-width: 700px;
+            background: rgba(10, 14, 39, 0.7);
+            border: 2px solid #ffd60a;
+            border-radius: 8px;
+            padding: 60px 50px;
+            box-shadow: 0 0 40px rgba(255, 214, 10, 0.15), inset 0 0 40px rgba(255, 214, 10, 0.05);
+            animation: slideIn 0.6s ease-out;
+            backdrop-filter: blur(10px);
+        }
+
+        .content h1 {
+            font-family: 'JetBrains Mono', monospace;
+            color: #ff006e;
+            font-size: 28px;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .content h2 {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00f5ff;
+            font-size: 16px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .content p {
+            color: #06ffa5;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .content ul {
+            list-style: none;
+            margin: 15px 0 25px 0;
+            padding: 0;
+        }
+
+        .content li {
+            color: #ffd60a;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            font-weight: 300;
+        }
+
+        .content li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: #00f5ff;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: auto;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: row;
+                gap: 6px;
+                background: rgba(10, 14, 39, 0.95);
+                padding: 10px;
+                border-radius: 8px;
+                border: 2px solid #00f5ff;
+                box-shadow: 0 -4px 20px rgba(0, 245, 255, 0.2);
+                backdrop-filter: blur(10px);
+            }
+
+            nav a {
+                padding: 8px 12px;
+                font-size: 8px;
+                border-radius: 3px;
+                box-shadow: 0 4px 12px rgba(255, 0, 110, 0.15);
+            }
+
+            .container {
+                padding: 40px 20px 120px;
+            }
+
+            .content {
+                padding: 40px 30px;
+                border-radius: 6px;
+            }
+
+            .content h1 {
+                font-size: 20px;
+            }
+
+            .content h2 {
+                font-size: 14px;
+            }
+
+            .content p,
+            .content li {
+                font-size: 13px;
+                line-height: 1.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="bio.html">BIO</a>
+        <a href="aboutme.html">ABOUT ME</a>
+        <a href="career.html" class="active">CAREER</a>
+        <a href="contact.html">CONTACT</a>
+        <a href="forum.html">FORUM</a>
+    </nav>
+
+    <div class="container">
+        <div class="content">
+            <h1>KHEBBAB MOHAMED</h1>
+            
+            <h2>CONTACT</h2>
+            <p>+213560863491<br>khebbab.mohamed5@gmail.com</p>
+            
+            <h2>PROFILE SUMMARY</h2>
+            <p>First year Master's student in Computer Science at USTHB, motivated and passionate about web technologies, mobile applications and artificial intelligence. I wish to continue my studies in a Master's program to deepen my skills and grow in the field.</p>
+            
+            <h2>EDUCATION</h2>
+            <ul>
+                <li>2022 - 2025: USTHB - Computer Science</li>
+            </ul>
+            
+            <h2>PERSONAL INFORMATION</h2>
+            <ul>
+                <li>Driving license: category B</li>
+                <li>More than a decade of swimming practice, with competition experience</li>
+            </ul>
+            
+            <h2>LANGUAGES</h2>
+            <ul>
+                <li>French: Good</li>
+                <li>English: Good</li>
+                <li>Arabic: Native language</li>
+            </ul>
+            
+            <h2>EXPERIENCE</h2>
+            <ul>
+                <li>Final Year Project – CERIST (Scientific and Technical Information Research Center): 2024<br>Development of an intelligent web portal for patient management and ECG/blood sugar anomaly detection, in collaboration with CERIST.</li>
+                <li>Cisco Network Training – Media Technology: 2024<br>Introduction to computer network basics: router/switch configuration, topology modeling, and network security concepts.</li>
+                <li>Renewal Management Software Development – Media Technology: 2025<br>Creation of a renewal tracking software (products, contracts), with user interface and database.</li>
+            </ul>
+            
+            <h2>TECHNICAL SKILLS</h2>
+            <ul>
+                <li>Python, C, JavaScript, Java, C++</li>
+                <li>Debugging, optimization, project structuring</li>
+                <li>Web development: HTML, CSS, JavaScript</li>
+                <li>Backend: Flask (API, server logic, database integration)</li>
+                <li>Mobile development: Flutter (UI, state management, API integration, deployment)</li>
+                <li>SQL: queries, indexing, transactions, views, relational models</li>
+                <li>MongoDB: NoSQL models, aggregation pipelines, backend/mobile integration</li>
+                <li>AI: data preparation, model training, validation, metrics, neural networks</li>
+                <li>Git, GitHub, CI/CD, static deployment</li>
+                <li>Cybersecurity: fundamental concepts at Master's level</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
